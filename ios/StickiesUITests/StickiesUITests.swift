@@ -35,6 +35,15 @@ class StickiesUITests: XCTestCase {
         let buttonElement = buttonQuery.element
 
         XCTAssertTrue(buttonElement.exists)
+
+        // Tap it
+        buttonElement.tap()
+
+        // Find the sticky note input text field
+        let inputTextFieldQuery = app.descendants(matching: .textField)
+        let inputTextFieldElement = inputTextFieldQuery.element
+
+        XCTAssertTrue(inputTextFieldElement.exists)
     }
 
 }

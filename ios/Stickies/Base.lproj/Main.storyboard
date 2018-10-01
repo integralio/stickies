@@ -20,7 +20,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="nab-OZ-gG1">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="c0a-je-akU"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="c0a-je-akU">
+                            <connections>
+                                <action selector="didSelectCreateStickyButton:" destination="BYZ-38-t0r" id="4OT-ou-spj"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="createStickyButton" destination="c0a-je-akU" id="cqS-5K-9bU"/>

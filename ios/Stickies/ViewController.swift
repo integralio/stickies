@@ -10,7 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    // MARK: -
+    // MARK: Properties
+
     @IBOutlet weak var createStickyButton: UIBarButtonItem!
+
+    // MARK: -
+    // MARK: Public Methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +24,25 @@ class ViewController: UIViewController {
         createStickyButton.accessibilityIdentifier = "createStickyButton"
     }
 
+    // MARK: -
+    // MARK: Actions
+
+    @IBAction func didSelectCreateStickyButton(_ sender: UIBarButtonItem) {
+        var createStickyInputField: UITextField?
+        let alertController = UIAlertController(
+            title: "New Sticky Note",
+            message: "Enter some text for your new sticky note.",
+            preferredStyle: .alert)
+        alertController.addTextField { (textField) in
+            // Capture a reference to the input text field
+            createStickyInputField = textField
+            // Allows the UI test to be able to enter into the text field
+            textField.accessibilityIdentifier = "stickyTextInput"
+        }
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(ok)
+        present(alertController, animated: true, completion: nil)
+    }
 
 }
 
