@@ -44,6 +44,21 @@ class StickiesUITests: XCTestCase {
         let inputTextFieldElement = inputTextFieldQuery.element
 
         XCTAssertTrue(inputTextFieldElement.exists)
+
+        // Type some text in the text field
+        let desiredText = UUID().uuidString
+        inputTextFieldElement.typeText(desiredText)
+
+        // Hit OK
+        let okButtonQuery = app.descendants(matching: .button)
+            .matching(identifier: "OK")
+        let okButtonElement = okButtonQuery.element
+        okButtonElement.tap()
+
+        // Verify what we entered got put in the sticky note label
+        let stickyLabelElement = app.descendants(matching: .any)
+            .matching(identifier: desiredText).element
+        XCTAssertTrue(stickyLabelElement.waitForExistence(timeout: 0.5))
     }
 
 }

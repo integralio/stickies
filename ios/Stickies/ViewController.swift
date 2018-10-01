@@ -15,6 +15,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var createStickyButton: UIBarButtonItem!
 
+    @IBOutlet weak var stickyLabel: UILabel!
+
     // MARK: -
     // MARK: Public Methods
 
@@ -39,7 +41,9 @@ class ViewController: UIViewController {
             // Allows the UI test to be able to enter into the text field
             textField.accessibilityIdentifier = "stickyTextInput"
         }
-        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let ok = UIAlertAction(title: "OK", style: .default) { (_) in
+            self.stickyLabel.text = createStickyInputField?.text
+        }
         alertController.addAction(ok)
         present(alertController, animated: true, completion: nil)
     }
