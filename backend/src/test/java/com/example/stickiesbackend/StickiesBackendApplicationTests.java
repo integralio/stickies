@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -46,10 +47,7 @@ public class StickiesBackendApplicationTests {
 
     @Test
     public void responseOK_whenAddingSticky() throws Exception {
-        mvc.perform(
-                post("/sticky")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{ \"content\" : \"hello1\" }"))
+        postSticky("{ \"content\" : \"hello1\" }")
                 .andExpect(status().isOk());
     }
 
@@ -57,10 +55,7 @@ public class StickiesBackendApplicationTests {
     public void responseContainsArrayWithOneSticky_whenAddingOneSticky() throws Exception {
 
 
-        mvc.perform(
-                post("/sticky")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{ \"content\" : \"hello2\" }"));
+        postSticky("{ \"content\" : \"hello2\" }");
 
         mvc.perform(get("/sticky"))
                 .andExpect(status().isOk())
@@ -69,18 +64,31 @@ public class StickiesBackendApplicationTests {
 
     @Test
     public void responseBadRequest_whenInvalidJson() throws Exception {
-        mvc.perform(post("/sticky")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("invalid text"))
+        postSticky("invalid text")
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void responseBadRequest_whenJSONMissingContentKey() throws Exception {
-        mvc.perform(post("/sticky")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"someotherkey\": \"myvalue\"}"))
+        postSticky("{\"someotherkey\": \"myvalue\"}")
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void responseOK_whenJSONHasAdditionalInfo() throws Exception {
+
+        String json =
+                "{ \"content\": \"content\" , \n" +
+                        "\"somethingelse\": \"value\"\n" +
+                        "}";
+        postSticky(json)
+                .andExpect(status().isOk());
+    }
+
+    private ResultActions postSticky(String s) throws Exception {
+        return mvc.perform(post("/sticky")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(s));
     }
 }
 
