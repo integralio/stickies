@@ -1,20 +1,25 @@
 package com.example.stickiesbackend;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/sticky")
 public class StickyController {
-    @GetMapping
-    public Object[] index() {
 
-        return new Object[0];
+    private StickyRepository repository;
+
+    public StickyController(StickyRepository repository) {
+        this.repository = repository;
+    }
+
+    @GetMapping
+    public Iterable<Sticky> index() {
+
+        return repository.findAll();
     }
 
     @PostMapping
-    public void postSticky() {
+    public void postSticky(@RequestBody Sticky sticky) {
+        repository.save(sticky);
     }
 }

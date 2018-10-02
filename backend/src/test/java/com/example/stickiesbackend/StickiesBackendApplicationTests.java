@@ -1,5 +1,6 @@
 package com.example.stickiesbackend;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,14 @@ public class StickiesBackendApplicationTests {
 
     @Autowired
     private MockMvc mvc;
+
+    @Autowired
+    private StickyRepository repository;
+
+    @After
+    public void tearDown() {
+        repository.deleteAll();
+    }
 
     @Test
     public void contextLoads() {
@@ -44,5 +53,18 @@ public class StickiesBackendApplicationTests {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void responseContainsArrayWithOneSticky_whenAddingOneSticky() throws Exception {
+
+
+        mvc.perform(
+                post("/sticky")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{ \"content\" : \"hello2\" }"));
+
+        mvc.perform(get("/sticky"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].content").value("hello2"));
+    }
 }
 
