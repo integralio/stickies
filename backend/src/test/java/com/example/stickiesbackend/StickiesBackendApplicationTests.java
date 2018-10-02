@@ -75,6 +75,12 @@ public class StickiesBackendApplicationTests {
                 .andExpect(status().isBadRequest());
     }
 
-
+    @Test
+    public void responseBadRequest_whenJSONMissingContentKey() throws Exception {
+        mvc.perform(post("/sticky")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"someotherkey\": \"myvalue\"}"))
+                .andExpect(status().isBadRequest());
+    }
 }
 

@@ -1,5 +1,6 @@
 package com.example.stickiesbackend;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,7 +20,11 @@ public class StickyController {
     }
 
     @PostMapping
-    public void postSticky(@RequestBody Sticky sticky) {
+    public ResponseEntity<Object> postSticky(@RequestBody Sticky sticky) {
+        if (sticky.getContent() == null) {
+            return ResponseEntity.badRequest().build();
+        }
         repository.save(sticky);
+        return null;
     }
 }
