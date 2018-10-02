@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -25,7 +26,11 @@ public class StickiesBackendApplicationTests {
 
     @Test
     public void responseContainsEmptyArray_whenThereAreNoStickies() throws Exception {
-        mvc.perform(get("/sticky")).andExpect(status().isOk());
+        mvc.perform(get("/sticky"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$").isEmpty());
+
     }
 
 }

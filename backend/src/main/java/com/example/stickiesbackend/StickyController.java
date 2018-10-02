@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sticky")
 public class StickyController {
     @GetMapping
-    public void index() {
+    public Object[] index() {
 
+        return new Object[0];
     }
 }
