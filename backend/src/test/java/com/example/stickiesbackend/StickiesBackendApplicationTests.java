@@ -66,5 +66,15 @@ public class StickiesBackendApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].content").value("hello2"));
     }
+
+    @Test
+    public void responseBadRequest_whenInvalidJson() throws Exception {
+        mvc.perform(post("/sticky")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("invalid text"))
+                .andExpect(status().isBadRequest());
+    }
+
+
 }
 
