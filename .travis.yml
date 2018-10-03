@@ -1,0 +1,48 @@
+jobs:
+  include:
+  - stage: backend
+    language: java
+    script: cd backend; ./gradlew build; ls -al;
+
+    before_deploy:
+    - echo TRAVIS_TAG is $TRAVIS_TAG
+    - echo TRAVIS_REPO_SLUG is $TRAVIS_REPO_SLUG
+    - echo the name of the jar is $(basename $(ls build/libs/*.jar))
+    - ../ci-scripts/travis-update-jar-filename.sh $(basename $(ls build/libs/*.jar))
+
+    deploy:
+      provider: releases
+      tag_name: $TRAVIS_TAG
+      target_commitish: $TRAVIS_COMMIT
+      name: $TRAVIS_TAG
+      api_key:
+        secure: mMfPNX0RCeD2tXIzmaF+MtubjQXnN3HRKxjX3G09VWvoNUIN/nrim6G5d/uqr/b90+JqJOh796MdKPn0ZiummILvQIqrOVu+/qcmWuew1tccehA9V7RP9g/vQI+HdCkmL58xP50u8otFfLMURYxUWNjkoL+JlsbyrbphHaSwBEWE0hHDoAF1WEZmp8a2EwiTNltUvrsmBkxz16aLafOULQbA2ISCiGRYr5X0poyQM31purwTvQIxCYfG8mbzQWKS8Te857VykA9E+qwjjXlEDQQFPyVNzRgP+v+UGldzuG209icfbSt8QM6aN9EALOVY/ny3bc4uyxukfMxHS9Y2bBlcECXoHUClhan4hfmlHHLmNxeK+PQ6eYxZz2kNOPYPHJaRcwAzj/dhGyhvNa7qG0ciYK+UUZi//laD63RhKqDL7tPFc4Zj7idR5lXIjxvXMx+xPVfHf59OorbNravGX4IemgcvITeXBogfWVoeVcaNaUqYgtqJxztQLSI1xRMP3eN7JqMPnz5e8PrX/wRB7qYsDILRH5y/OvBBJVnOiO+EcMZbANldUfDvDf0HMRC58yqATePr8aosoTcV/9kOK63boIFKpfPQde+0U+pifKO9L1LssAQ06OvHCzoltiXF2Uwc3DIX1ErvGT4bAgmXMBVWasrXj/YM0CpeXvqnmfk=
+      file_glob: true
+      file: ./**/*.jar
+      skip_cleanup: true
+      on:
+        all_branches: true
+        tags: true
+
+  - stage: ios
+    language: objective-c
+    os: osx	
+    osx_image: xcode10
+    xcode_project: ios/Stickies.xcodeproj
+    xcode_scheme: Stickies
+    xcode_destination: platform=iOS Simulator,OS=12.0,name=iPhone X
+    before_script: 
+
+    after_script: 
+      - echo SWITCHING JDK
+      - brew tap caskroom/versions;brew update; brew cask install java8
+      - export JAVA_HOME=$(/usr/libexec/java_home --failfast --version 1.8) ; java -version
+      - java -version
+      - echo TRAVIS_TAG is $TRAVIS_TAG
+      - echo CHECKING if we have the BACKEND_JAR_FILENAME... $BACKEND_JAR_FILENAME
+      - echo the URL is... "https://github.com/$TRAVIS_REPO_SLUG/releases/download/$TRAVIS_TAG/$BACKEND_JAR_FILENAME"
+      - curl -L "https://github.com/$TRAVIS_REPO_SLUG/releases/download/$TRAVIS_TAG/$BACKEND_JAR_FILENAME" > backend.jar ;  
+      - java -jar backend.jar&
+      - echo going to sleep to wait for backend.jar to start up; sleep 30; 
+      - curl localhost:8080/
+      
