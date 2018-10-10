@@ -14,6 +14,10 @@
 		F80AEB8E2162BA3D002D9F0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F80AEB8C2162BA3D002D9F0C /* LaunchScreen.storyboard */; };
 		F80AEB992162BA3D002D9F0C /* StickiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80AEB982162BA3D002D9F0C /* StickiesTests.swift */; };
 		F80AEBA42162BA3D002D9F0C /* StickiesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80AEBA32162BA3D002D9F0C /* StickiesUITests.swift */; };
+		F8FE176F216E9DF30093542C /* HTTPRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE176E216E9DF30093542C /* HTTPRequestService.swift */; };
+		F8FE1771216E9E160093542C /* StickiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE1770216E9E160093542C /* StickiesAPI.swift */; };
+		F8FE1773216E9E780093542C /* Sticky.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE1772216E9E780093542C /* Sticky.swift */; };
+		F8FE1775216E9FCC0093542C /* MockHTTPRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE1774216E9FCC0093542C /* MockHTTPRequestService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,10 @@
 		F80AEB9F2162BA3D002D9F0C /* StickiesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StickiesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80AEBA32162BA3D002D9F0C /* StickiesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickiesUITests.swift; sourceTree = "<group>"; };
 		F80AEBA52162BA3D002D9F0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8FE176E216E9DF30093542C /* HTTPRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestService.swift; sourceTree = "<group>"; };
+		F8FE1770216E9E160093542C /* StickiesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickiesAPI.swift; sourceTree = "<group>"; };
+		F8FE1772216E9E780093542C /* Sticky.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sticky.swift; sourceTree = "<group>"; };
+		F8FE1774216E9FCC0093542C /* MockHTTPRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHTTPRequestService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +111,9 @@
 				F80AEB8A2162BA3D002D9F0C /* Assets.xcassets */,
 				F80AEB8C2162BA3D002D9F0C /* LaunchScreen.storyboard */,
 				F80AEB8F2162BA3D002D9F0C /* Info.plist */,
+				F8FE176E216E9DF30093542C /* HTTPRequestService.swift */,
+				F8FE1770216E9E160093542C /* StickiesAPI.swift */,
+				F8FE1772216E9E780093542C /* Sticky.swift */,
 			);
 			path = Stickies;
 			sourceTree = "<group>";
@@ -112,6 +123,7 @@
 			children = (
 				F80AEB982162BA3D002D9F0C /* StickiesTests.swift */,
 				F80AEB9A2162BA3D002D9F0C /* Info.plist */,
+				F8FE1774216E9FCC0093542C /* MockHTTPRequestService.swift */,
 			);
 			path = StickiesTests;
 			sourceTree = "<group>";
@@ -256,6 +268,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8FE1773216E9E780093542C /* Sticky.swift in Sources */,
+				F8FE176F216E9DF30093542C /* HTTPRequestService.swift in Sources */,
+				F8FE1771216E9E160093542C /* StickiesAPI.swift in Sources */,
 				F80AEB862162BA3C002D9F0C /* ViewController.swift in Sources */,
 				F80AEB842162BA3C002D9F0C /* AppDelegate.swift in Sources */,
 			);
@@ -266,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F80AEB992162BA3D002D9F0C /* StickiesTests.swift in Sources */,
+				F8FE1775216E9FCC0093542C /* MockHTTPRequestService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +384,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STICKIES_API_BASE_URL = "http://localhost:8000";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -422,6 +439,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STICKIES_API_BASE_URL = "http://localhost:8000";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
