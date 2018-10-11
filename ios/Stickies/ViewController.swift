@@ -17,6 +17,11 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var stickyLabel: UILabel!
 
+    @IBOutlet weak var stickyNoteView: UIView!
+
+    /// The text displayed on the sticky note
+    var stickyText = ""
+
     // MARK: -
     // MARK: Public Methods
 
@@ -24,6 +29,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         createStickyButton.accessibilityIdentifier = "createStickyButton"
+        setStickyNoteVisibility()
+    }
+
+    func setStickyNoteVisibility() {
+        stickyNoteView.isHidden = stickyText.isEmpty
     }
 
     // MARK: -
@@ -42,7 +52,9 @@ class ViewController: UIViewController {
             textField.accessibilityIdentifier = "stickyTextInput"
         }
         let ok = UIAlertAction(title: "OK", style: .default) { (_) in
-            self.stickyLabel.text = createStickyInputField?.text
+            self.stickyText = createStickyInputField?.text ?? ""
+            self.stickyLabel.text = self.stickyText
+            self.setStickyNoteVisibility()
         }
         alertController.addAction(ok)
         present(alertController, animated: true, completion: nil)

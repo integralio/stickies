@@ -26,6 +26,22 @@ class StickiesUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    func testWhenAppLaunches_emptyStateLabelAppears_andStickyNoteViewIsHidden() {
+        let app = XCUIApplication()
+
+        // Make sure that the empty state label appears
+        let emptyStateLabelQuery = app.descendants(matching: .staticText)
+            .matching(identifier: "emptyStateLabel")
+        let emptyStateLabelElement = emptyStateLabelQuery.element
+        XCTAssertTrue(emptyStateLabelElement.exists)
+
+        // Make sure the sticky note view does not appear
+        let stickyNotePaperQuery = app.descendants(matching: .any)
+            .matching(identifier: "stickyNotePaper")
+        let stickyNotePaperElement = stickyNotePaperQuery.element
+        XCTAssertFalse(stickyNotePaperElement.exists)
+    }
+
     func testUserCanEnterAndSaveStickyContent() {
         let app = XCUIApplication()
 
