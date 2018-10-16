@@ -27,6 +27,13 @@ class StickiesAPI {
         }
     }
 
+    func deleteSticky(withId stickyId: Int, completion: (Error?) -> Void) {
+        let url = apiURL(given: .stickyEndpoint).appendingPathComponent("/\(stickyId)")
+        service.fireRequest(to: url, withMethod: "DELETE", withData: nil) { (_, error) in
+            completion(error)
+        }
+    }
+
 }
 
 private extension StickiesAPI {

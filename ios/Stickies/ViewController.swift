@@ -19,6 +19,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var stickyNoteView: UIView!
 
+    @IBOutlet weak var deleteStickyButton: UIBarButtonItem!
+
     /// The text displayed on the sticky note
     var stickyText = ""
 
@@ -29,11 +31,19 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         createStickyButton.accessibilityIdentifier = "createStickyButton"
+        deleteStickyButton.accessibilityIdentifier = "deleteStickyButton"
         setStickyNoteVisibility()
+        setBarButtonItems()
     }
 
     func setStickyNoteVisibility() {
         stickyNoteView.isHidden = stickyText.isEmpty
+    }
+
+    func setBarButtonItems() {
+        navigationItem.rightBarButtonItem = stickyText.isEmpty ?
+            createStickyButton :
+            deleteStickyButton
     }
 
     // MARK: -
@@ -55,8 +65,26 @@ class ViewController: UIViewController {
             self.stickyText = createStickyInputField?.text ?? ""
             self.stickyLabel.text = self.stickyText
             self.setStickyNoteVisibility()
+            self.setBarButtonItems()
         }
         alertController.addAction(ok)
+        present(alertController, animated: true, completion: nil)
+    }
+
+    @IBAction func didSelectDeleteStickyButton(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(
+            title: "Delete Note?",
+            message: "Are you sure you want to delete this note?",
+            preferredStyle: .alert)
+        let no = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        let yes = UIAlertAction(title: "Yes", style: .destructive) { (_) in
+            self.stickyText = ""
+            self.setStickyNoteVisibility()
+            self.setBarButtonItems()
+        }
+
+        alertController.addAction(no)
+        alertController.addAction(yes)
         present(alertController, animated: true, completion: nil)
     }
 

@@ -77,4 +77,60 @@ class StickiesUITests: XCTestCase {
         XCTAssertTrue(stickyLabelElement.waitForExistence(timeout: 0.5))
     }
 
+    func testUserCanDeleteStickyNote() {
+        // Create a sticky
+        let app = XCUIApplication()
+
+        // Find the button
+        let buttonQuery = app.descendants(matching: .button)
+            .matching(identifier: "createStickyButton")
+        let buttonElement = buttonQuery.element
+
+        XCTAssertTrue(buttonElement.exists)
+
+        // Tap it
+        buttonElement.tap()
+
+        // Find the sticky note input text field
+        let inputTextFieldQuery = app.descendants(matching: .textField)
+        let inputTextFieldElement = inputTextFieldQuery.element
+
+        XCTAssertTrue(inputTextFieldElement.exists)
+
+        // Type some text in the text field
+        let desiredText = UUID().uuidString
+        inputTextFieldElement.typeText(desiredText)
+
+        // Hit OK
+        let okButtonQuery = app.descendants(matching: .button)
+            .matching(identifier: "OK")
+        let okButtonElement = okButtonQuery.element
+        okButtonElement.tap()
+
+        // Verify what we entered got put in the sticky note label
+        let stickyLabelElement = app.descendants(matching: .any)
+            .matching(identifier: desiredText).element
+        XCTAssertTrue(stickyLabelElement.waitForExistence(timeout: 0.5))
+
+        // Delete the sticky
+        let deleteButtonQuery = app.descendants(matching: .button)
+            .matching(identifier: "deleteStickyButton")
+        let deleteButtonElement = deleteButtonQuery.element
+        XCTAssertTrue(deleteButtonElement.waitForExistence(timeout: 1.0))
+
+        deleteButtonElement.tap()
+
+        // Tap "Yes" on the confirmation dialog that appears
+        let confirmDeleteButtonQuery = app.descendants(matching: .button)
+            .matching(identifier: "Yes")
+        let confirmDeleteButtonElement = confirmDeleteButtonQuery.element
+        confirmDeleteButtonElement.tap()
+
+        // Assert the sticky note is no longer visible
+        let stickyNotePaperQuery = app.descendants(matching: .any)
+            .matching(identifier: "stickyNotePaper")
+        let stickyNotePaperElement = stickyNotePaperQuery.element
+        XCTAssertFalse(stickyNotePaperElement.exists)
+    }
+
 }

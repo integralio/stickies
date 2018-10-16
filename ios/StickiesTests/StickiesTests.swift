@@ -42,10 +42,19 @@ class StickiesTests: XCTestCase {
         }
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testDeleteStickyNote() {
+        let exp = expectation(description: "it should delete a sticky note")
+        let service: HTTPRequestService = MockHTTPRequestService()
+        let api = StickiesAPI(service: service)
+
+        api.deleteSticky(withId: 1) { (error) in
+            defer { exp.fulfill() }
+
+            XCTAssertNil(error)
+        }
+
+        waitForExpectations(timeout: 0.5) { (error) in
+            XCTAssertNil(error)
         }
     }
 

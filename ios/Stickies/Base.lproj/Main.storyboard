@@ -46,6 +46,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="nab-OZ-gG1">
+                        <barButtonItem key="leftBarButtonItem" id="Q2h-TM-sBf"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="c0a-je-akU">
                             <connections>
                                 <action selector="didSelectCreateStickyButton:" destination="BYZ-38-t0r" id="4OT-ou-spj"/>
@@ -54,11 +55,17 @@
                     </navigationItem>
                     <connections>
                         <outlet property="createStickyButton" destination="c0a-je-akU" id="cqS-5K-9bU"/>
+                        <outlet property="deleteStickyButton" destination="n3B-by-ejE" id="wED-RX-QRI"/>
                         <outlet property="stickyLabel" destination="6QN-xA-XWH" id="r3g-0r-dGo"/>
                         <outlet property="stickyNoteView" destination="87s-B0-TXB" id="mbo-W9-r1I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <barButtonItem systemItem="trash" id="n3B-by-ejE">
+                    <connections>
+                        <action selector="didSelectDeleteStickyButton:" destination="BYZ-38-t0r" id="P9X-uF-cbB"/>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="1076" y="145.27736131934034"/>
         </scene>

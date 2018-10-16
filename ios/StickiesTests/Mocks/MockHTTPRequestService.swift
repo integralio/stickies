@@ -18,6 +18,8 @@ class MockHTTPRequestService: HTTPRequestService {
         case "http://localhost:8080/stickies/1" where HTTPMethod == "GET":
             let sticky = Sticky(content: "This is a sticky note.", id: 1)
             completion(sticky, nil)
+        case "http://localhost:8080/stickies/1" where HTTPMethod == "DELETE":
+            completion(nil, nil)
         case "http://localhost:8080/stickies":
             let sticky = Sticky(content: "My new sticky note.", id: UUID().uuidString.hashValue)
             completion(sticky, nil)
