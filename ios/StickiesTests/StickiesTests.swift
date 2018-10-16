@@ -19,9 +19,27 @@ class StickiesTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testSaveStickyNote() {
+        let exp = expectation(description: "it should save a sticky note")
+        let service: HTTPRequestService = MockHTTPRequestService()
+        let api = StickiesAPI(service: service)
+        let sticky = Sticky(content: "My new sticky note.")
+
+        api.saveSticky(sticky) { (sticky, error) in
+            defer { exp.fulfill() }
+            XCTAssertNil(error)
+            guard let sticky = sticky else {
+                XCTFail("Sticky was nil")
+                return
+            }
+
+            XCTAssertEqual(sticky.content, "My new sticky note.")
+            XCTAssertNotNil(sticky.id)
+        }
+
+        waitForExpectations(timeout: 0.5) { (error) in
+            XCTAssertNil(error)
+        }
     }
 
     func testPerformanceExample() {

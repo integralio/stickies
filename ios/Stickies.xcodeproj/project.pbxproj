@@ -14,6 +14,10 @@
 		F80AEB8E2162BA3D002D9F0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F80AEB8C2162BA3D002D9F0C /* LaunchScreen.storyboard */; };
 		F80AEB992162BA3D002D9F0C /* StickiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80AEB982162BA3D002D9F0C /* StickiesTests.swift */; };
 		F80AEBA42162BA3D002D9F0C /* StickiesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80AEBA32162BA3D002D9F0C /* StickiesUITests.swift */; };
+		F8FE3644216FFB4300E64AF0 /* HTTPRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE3643216FFB4300E64AF0 /* HTTPRequestService.swift */; };
+		F8FE3647216FFB7B00E64AF0 /* MockHTTPRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE3646216FFB7B00E64AF0 /* MockHTTPRequestService.swift */; };
+		F8FE364A216FFBAE00E64AF0 /* Sticky.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE3649216FFBAE00E64AF0 /* Sticky.swift */; };
+		F8FE364C216FFC3700E64AF0 /* StickiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE364B216FFC3700E64AF0 /* StickiesAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,10 @@
 		F80AEB9F2162BA3D002D9F0C /* StickiesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StickiesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80AEBA32162BA3D002D9F0C /* StickiesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickiesUITests.swift; sourceTree = "<group>"; };
 		F80AEBA52162BA3D002D9F0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8FE3643216FFB4300E64AF0 /* HTTPRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestService.swift; sourceTree = "<group>"; };
+		F8FE3646216FFB7B00E64AF0 /* MockHTTPRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHTTPRequestService.swift; sourceTree = "<group>"; };
+		F8FE3649216FFBAE00E64AF0 /* Sticky.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sticky.swift; sourceTree = "<group>"; };
+		F8FE364B216FFC3700E64AF0 /* StickiesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickiesAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +105,8 @@
 		F80AEB822162BA3C002D9F0C /* Stickies */ = {
 			isa = PBXGroup;
 			children = (
+				F8FE3642216FFB3000E64AF0 /* Networking */,
+				F8FE3648216FFBA700E64AF0 /* Models */,
 				F80AEB832162BA3C002D9F0C /* AppDelegate.swift */,
 				F80AEB852162BA3C002D9F0C /* ViewController.swift */,
 				F80AEB872162BA3C002D9F0C /* Main.storyboard */,
@@ -110,6 +120,7 @@
 		F80AEB972162BA3D002D9F0C /* StickiesTests */ = {
 			isa = PBXGroup;
 			children = (
+				F8FE3645216FFB7000E64AF0 /* Mocks */,
 				F80AEB982162BA3D002D9F0C /* StickiesTests.swift */,
 				F80AEB9A2162BA3D002D9F0C /* Info.plist */,
 			);
@@ -123,6 +134,31 @@
 				F80AEBA52162BA3D002D9F0C /* Info.plist */,
 			);
 			path = StickiesUITests;
+			sourceTree = "<group>";
+		};
+		F8FE3642216FFB3000E64AF0 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				F8FE3643216FFB4300E64AF0 /* HTTPRequestService.swift */,
+				F8FE364B216FFC3700E64AF0 /* StickiesAPI.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		F8FE3645216FFB7000E64AF0 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				F8FE3646216FFB7B00E64AF0 /* MockHTTPRequestService.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		F8FE3648216FFBA700E64AF0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F8FE3649216FFBAE00E64AF0 /* Sticky.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,7 +292,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8FE3644216FFB4300E64AF0 /* HTTPRequestService.swift in Sources */,
 				F80AEB862162BA3C002D9F0C /* ViewController.swift in Sources */,
+				F8FE364A216FFBAE00E64AF0 /* Sticky.swift in Sources */,
+				F8FE364C216FFC3700E64AF0 /* StickiesAPI.swift in Sources */,
 				F80AEB842162BA3C002D9F0C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F80AEB992162BA3D002D9F0C /* StickiesTests.swift in Sources */,
+				F8FE3647216FFB7B00E64AF0 /* MockHTTPRequestService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +408,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STICKIES_API_BASE_URL = "http://localhost:8080";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -422,6 +463,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STICKIES_API_BASE_URL = "http://localhost:8080";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
